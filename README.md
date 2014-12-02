@@ -1,63 +1,97 @@
+<html>
+<head>
+	<title>php实现简单的计算功能</title>
+</head>
 <?php
-/************************************************************************/
-/* AppServ Open Project                                          */
-/* Copyright (c) 2001 by Phanupong Panyadee (http://www.appservnetwork.com)         */
-/* This program is free software. You can redistribute it and/or modify */
-/* it under the terms of the GNU General Public License as published by */
-/* the Free Software Foundation; either version 2 of the License.       */
-/************************************************************************/
 
-include("main.php");
+           $num1=true;
+           $num2=true;
+           $numa=true;
+           $numb=true;
+           $message="";
+       if (isset($_GET["sub"])){
+           if ($_GET["num1"]=="") {
+      	     $num1=false;
+      	     $message="第一个数不能为空";
+              }
+           if (!is_numeric($_GET["num1"])) {
+           	 $num1=false;
+           	 $message="第一个数不是数字";
+           }
+           if ($_GET["num2"]=="") {
+               $num2=false;
+      	       $message="第二个数不能为空";
+              }
+           if (!is_numeric($_GET["num2"])) {
+           	   $num2=false;
+           	   $message="第二个数不是数字";
+           }
+        	$sum=0;
+     	    switch($_GET["ysf"]) {
+     		     case "+":
+     			     $sum=$_GET["num1"]+$_GET["num2"];
+     			     break;
 
-print "
-<pre>
-โปรดอ่าน 
--------------------
-นี่คือโปรแกรม "._APPVERSION." "._FOR." "._OS."
+     			     case "-":
+     			     $sum=$_GET["num1"]-$_GET["num2"];
+     			     break;
 
-"._APPSERV." คือโปรแกรมที่รวบรวมโอเพ่นซอร์สซอฟท์แวร์หลายๆ อย่างเข้าด้วยกัน สำหรับ "._OS."
-"._APPSERV." ได้รวบรวมโปรแกรมล่าสุดไว้ในในแพ๊คเกจนี้ทั้งหมด
+     			     case "*":
+     			     $sum=$_GET["num1"]*$_GET["num2"];
+     			     break;
 
-   - "._APACHE." "._VERSION." "._VAPACHE."
-   - "._PHP." "._VERSION." "._VPHP."
-   - "._MYSQL." "._VERSION." "._VMYSQL."
-   - "._PHPMYADMIN." "._VERSION." "._VPHPMYADMIN."
-   - "._PERL." "._VERSION." "._VPERL."
+     			     case "/":
+     		    	$sum=$_GET["num1"]/$_GET["num2"];
+     		    	break;
 
-รายละเอียดอื่นๆ ที่เกี่ยวกับ "._APPSERV." ติดตามได้ที่ :
-http://www.appservernetwork.com
-ผู้จัดทำ : ภาณุพงศ์ ปัญญาดี
-ประเทศ : ไทย
+     		    	case "%":
+     		    	$sum=$_GET["num1"]%$_GET["num2"];
+     		    	break;
+     	}
+     }
 
-วิธีการใช้งาน
--------------------
-::: Starting Services :::
-1. รัน Apache Web Server ไปที่ Start --> Programs --> AppServ --> Apache Control Server --> Start
-2. รัน MySQL Database ไปที่  Start --> Programs --> AppServ --> WinMySQLAdmin
-3. เข้าไปที่ http://yourhost.com (http://localhost) 
-4. เว็บเพจต่างๆ จะเก็บไว้ที่ C:\AppServ\www\
-5. สำหรับการเข้าสู่ PHPNuke Admin ให้ไปที่  http://yourhost.com/"._LPHPNUKE."/admin.php ป้อน Login : God Password: Password
-6. การเข้าสู่หน้า phpBB2 Admin ให้ไปที่ http://localhost/"._LPHPBB."/login.php Login : God Password: Password
-7. แก้ไข config ของ phpMyAdmin แก้ได้ที่ C:\AppServ\www\\"._LPHPMYADMIN."\config.php
-8. เมื่อคุณต้องการสร้างเว็บให้เก็บไฟล์ไว้ที่ C:\AppServ\www
-9. เมื่อคุณต้องการเก็บ CGI ที่เขียนจาก Perl ให้เก็บไว้ที่ C:\AppServ\www\cgi-bin
-
-::: Stop Services :::
-1. ปิดการทำงาน Apache Web Server ไปที่ Start --> Programs --> AppServ --> Apache Control Server --> Stop
-2. ปิดการทำงาน MySQL Database ไปที่  Start --> Programs --> AppServ --> WinMySQLAdmin 
-	- กด \"Stop Extended Server Status\" ตรงขอบล่างซ้าย
-	- คลิกขวา --> Stop Service
-	- คลิกขวา --> Shut down this tool
-	- โปรดรอ 5 วินาที
-
-::: ลบออก :::
-1. โปรดจำ โปรดจำ กรุณาปิด Services ของ Apache และ MySQL ก่อนการ uninstall ทุกครั้ง
-2. อย่าลืม Backup www directory ของคุณด้วย
-3. ลบได้เลย :-)
-
-License
--------------------
-AppServ is copyrighted by its authors and licensed under terms of the
-GNU Lesser Public License (LGPL) - see file COPYING for details.
-";
 ?>
+<body>
+     <table border="1" align="center" width="400">
+            <caption><h1>计算器</h1></caption>
+     	    <form action="jsq.php">
+     	    	<tr>
+     	    		<td>
+     	    			<input type="test" size="5" name="num1">
+                    </td>
+                    <td>
+                    	<select name="ysf">
+                    		<option value="+" <?php if ($_GET["ysf"]=="+") {echo "selected";} ?> >+</option>
+                    		<option value="-"<?php if ($_GET["ysf"]=="-") {echo "selected";} ?>>-</option>
+                    		<option value="*"<?php if ($_GET["ysf"]=="*") {echo "selected";} ?>>*</option>
+                    		<option value="/"<?php if ($_GET["ysf"]=="/") {echo "selected";} ?>>/</option>
+                    		<option value="%"<?php if ($_GET["ysf"]=="%") {echo "selected";} ?>>%</option>
+
+                    	</select>
+
+                    </td>
+                    <td>
+                    	<input type="test" size="5" name="num2">
+
+                    </td>
+                    <td>
+                    	<input type="submit" name="sub" value="计算">
+                    </td>
+                </tr>
+                <?php
+                    if (isset($_GET["sub"])) {
+                    	echo "<tr><td>";
+                    	if ($num1&&$num2) {
+                    		echo "结果：" .$_GET["num1"]. " " .$_GET["ysf"]. " " .$_GET["num2"]. "=" .$sum;
+                    	}else{
+                    		echo "$message";
+                    	}
+                    	echo "</td></tr>";
+                    }
+
+
+                ?>
+             </form>
+     </table>
+</body>
+</html>
