@@ -1,0 +1,66 @@
+#include<stdio.h>
+int ejz(int z,char *a)
+{
+      int j,n=0;
+    for(n=0;z!=0;n++)
+        {
+            j=z%2;
+            a[n]=j+'0';
+            z=z/2;
+        }
+        a[n]='\0';
+   return 0;
+}
+int sljz(int x,char *a)
+{
+    int d,m=0;
+  
+       for(m=0;x!=0;m++)
+       {
+	   d=x%16;
+           if(d < 10)
+           {
+               a[m]='0'+d;
+           }
+           else
+           {
+               a[m]='A'+d-10;
+           }
+           
+       	   x=x/16;
+       }
+          a[m]='\0';
+   return 0;
+}
+int bjz(int y,char *a)
+{
+    int k,o=0;
+    for(o=0;y!=0;o++)
+    {
+        k=y%8;
+        a[o]=k+'0';
+        y=y/8;
+    }
+     a[o]='\0';
+    
+    return 0;
+}
+void reserve(char *dest)
+{
+ 
+    int len;
+    int i;
+    char temp;
+   
+
+    len = strlen(dest);
+    i = len / 2;                       //防止出现重复交换还原
+
+    while(*dest != '\0')
+    {
+        while(i > 0)                   //实现字符交换
+        {
+            temp = *dest;
+            *dest = *(dest + len - 1);
+            *(dest + len - 1) = temp;
+           
